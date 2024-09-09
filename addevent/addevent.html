@@ -1,0 +1,67 @@
+<!-- HTML -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
+    <link rel="stylesheet" href="addevent.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>EM</h1>
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main-container">
+        <div class="event-form-container">
+            <h2>Add Event</h2>
+            <form>
+                <div class="form-group">
+                    <label for="event-name">Event Name:</label>
+                    <input type="text" id="event-name" name="event-name" placeholder="Enter event name" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Event Date and Time:</label>
+                    <input type="datetime-local" id="event-date" name="event-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" placeholder="Enter event location" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-description">Event Description:</label>
+                    <textarea id="event-description" name="event-description" placeholder="Enter event description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="event-status">Event Status:</label>
+                    <select id="event-status" name="event-status">
+                        <option value="planning">Planning</option>
+                        <option value="finalized">Finalized</option>
+                        <option value="canceled">Canceled</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="event-category">Event Category:</label>
+                    <select id="event-category" name="event-category">
+                        <!-- Options will be dynamically populated -->
+                    </select>
+                </div>
+                <button type="submit" class="save-button">Save</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Event Management App. All rights reserved.</p>
+    </footer>
+
+    <script src="../dist/addevent.bundle.js"></script>
+</body>
+</html>

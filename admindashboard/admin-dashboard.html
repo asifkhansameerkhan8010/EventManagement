@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header-container">
+            <h1>Admin</h1>
+            <nav class="nav">
+                <a href="../eventcategory/eventcategory.html">Event Category</a>
+                <a href="../login/login.html" id="logout-button">Logout</a>
+                <button id="backup-button">Backup Data</button>
+            </nav>
+        </div>
+    </header>
+    <button id="adduser">Add User</button>
+    <main class="main-container">
+        <div class="form-container" >
+            <h2>Add New User</h2>
+            <form id="add-user-form">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter username" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="Enter email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm password" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select id="role" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-button">Add User</button>
+                <div id="signup-error" class="error-message"></div>
+            </form>
+        </div>
+
+        <!-- User List -->
+        <div class="user-list-container">
+            <h2>Registered Users</h2>
+            <table class="user-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-list-body">
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Backup-->
+        <div class="backup-history-container">
+            <h2>Backup History</h2>
+            <div id="backup-history">
+                
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Event Management App. All rights reserved.</p>
+    </footer>
+
+    <script src="../dist/admindashboard.bundle.js"></script>
+</body>
+</html>

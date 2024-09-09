@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="signup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Create an Account</h1>
+        <form id="signup-form">
+            <label for="username">Username:</label>
+            <input type="text" id="username" placeholder="Username" required>
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" placeholder="Email" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" placeholder="Password" required>
+            
+            <label for="confirm-password">Confirm Password:</label>
+            <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+            
+            <button type="submit">Sign Up</button>
+            <div id="signup-error" style="color: red;"></div>
+        </form>
+        <p>Already have an account? <a href="../login/login.html">Login</a></p>
+    </div>
+    <script src="../dist/signup.bundle.js"></script>
+</body>
+</html>

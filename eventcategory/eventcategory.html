@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Event Categories</title>
+    <link rel="stylesheet" href="eventcategory.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Admin</h1>
+            <nav class="nav">
+                <a href="../admindashboard/admin-dashboard.html">Admin Dashboard</a>
+                <a href="../login/login.html" id="logout-button">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="form-container">
+            <h2>Add New Category</h2>
+            <form id="add-category-form">
+                <div class="form-group">
+                    <label for="category-name">Category Name</label>
+                    <input type="text" id="category-name" placeholder="Enter category name" required>
+                </div>
+                <button type="submit" class="submit-button">Add Category</button>
+                <div id="category-error" class="error-message"></div>
+            </form>
+        </div>
+
+        <!-- Category List -->
+        <div class="category-list-container">
+            <h2>Event Categories</h2>
+            <table class="category-table">
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="category-list-body">
+                    
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Event Management App. All rights reserved.</p>
+    </footer>
+
+    <script src="../dist/eventcategory.bundle.js"></script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Guests</title>
+    <link rel="stylesheet" href="guest-management.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>EM</h1>
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+            </nav>
+        </div>
+    </header>
+    <main class="main-container">
+        <h2>Manage Guests</h2>
+
+        <div class="add-guest">
+            <h3>Add Guest</h3>
+            <form id="add-guest-form">
+                <input type="text" id="guest-name" placeholder="Enter guest name" required>
+                <input type="email" id="guest-email" placeholder="Enter guest email" required>
+                <select id="guest-rsvp" required>
+                    <option value="Pending">Pending</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Declined">Declined</option>
+                </select>
+                <button type="submit" class="add-button">Add Guest</button>
+            </form>
+        </div>
+        <div class="guest-list">
+            <h3>Guest List</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="guest-list-body">
+                </tbody>
+            </table>
+        </div>
+
+        <div class="actions">
+            <button class="send-invites-button">Send Invitations</button>
+            <p>Track RSVP responses in real-time.</p>
+        </div>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2024 Event Management App. All rights reserved.</p>
+    </footer>
+
+    <script src="../dist/guestManagement.bundle.js"></script>
+    <script type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function() {
+          emailjs.init("56pH_lVXygPWHhhLA"); 
+        })();
+      </script>
+      
+
+</body>
+</html>
+

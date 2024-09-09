@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">EM</h1>
+            <nav class="nav">
+                <a href="../dashboard/dashboard.html">Dashboard</a>
+                <button id="logout-button">Logout</button>
+                <div id="username-display"></div> <!-- Username Display -->
+            </nav>
+        </div>
+    </header>
+    <main class="main-container">
+        <button class="add-event-button desktop" onclick="location.href='../addevent/addevent.html'">Add Event</button>
+        <button class="add-event-fab mobile" onclick="location.href='../addevent/addevent.html'">+</button>
+
+        <!-- Search and Filter Bar -->
+        <div class="search-filter-bar">
+            <input type="text" class="search-bar" placeholder="Search events..." id="search-bar">
+            <select class="filter-date" id="filter-date">
+                <option value="">Filter by Date</option>
+                <option value="today">Today</option>
+                <option value="week">This Week</option>
+                <option value="month">This Month</option>
+            </select>
+            <select class="filter-category" id="filter-category">
+                <option value="">Filter by Category</option>
+                <!-- Categories -->
+            </select>
+            <select class="filter-status" id="filter-status">
+                <option value="">Filter by Status</option>
+                <option value="planning">Planning</option>
+                <option value="finalized">Finalized</option>
+                <option value="canceled">Canceled</option>
+            </select>
+        </div>
+        <div class="events-list" id="events-list"></div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 Event Management App. All rights reserved.</p>
+    </footer>
+
+
+    <div id="event-agenda-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="agenda-items-container"></div>
+
+            <form id="agenda-form">
+                <label for="agenda-start-time">Start Time:</label>
+                <input type="time" id="agenda-start-time" required>
+                <label for="agenda-end-time">End Time:</label>
+                <input type="time" id="agenda-end-time" required>
+                <label for="agenda-description">Description:</label>
+                <textarea id="agenda-description" required></textarea>
+                <button type="button" id="add-agenda-item">Add Agenda Item</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../dist/dashboard.bundle.js"></script>
+    <script src="../dist/agenda.bundle.js"></script>
+    
+</body>
+</html>

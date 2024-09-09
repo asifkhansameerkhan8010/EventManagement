@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.94.0"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js"
+  },
+  "devDependencies": {
+    "webpack-cli": "^5.1.4"
+  }
+}

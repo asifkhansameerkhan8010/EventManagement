@@ -1,0 +1,254 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
+    overflow-x: hidden; 
+}
+
+.header {
+    background-color: #4c93af;
+    padding: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1{
+    margin: 0px;
+}
+
+.header-container {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 0 15px; 
+    box-sizing: border-box;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin: 5px;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.nav a:hover {
+    font-weight: 800;
+}
+
+
+
+.header-container {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+   
+    box-sizing: border-box;
+}
+
+.nav {
+    display: flex;
+
+    justify-content: center;
+    gap: 15px;
+    box-sizing: border-box;
+}
+
+
+
+.nav a:hover {
+    font-weight: 800;
+}
+
+.main-container {
+    flex-grow: 1;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.event-form-container {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    text-align: left;
+    width: 100%; 
+}
+
+label {
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #555;
+}
+
+input[type="text"],
+input[type="datetime-local"],
+textarea,
+select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #4c93af;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.save-button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #4c93af;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.save-button:hover {
+    background-color: #4c93af;
+    box-shadow: 0 4px 8px rgba(0, 153, 255, 0.2);
+}
+
+.add-event-button {
+    display: none;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #4c93af;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    right: 20px;
+}
+
+
+
+.footer {
+    background-color: #4c93af;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: auto;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+.footer p{
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+
+
+ 
+
+    .add-event-button {
+        display: block;
+    }
+
+    .main-container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .add-event-fab {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .event-form-container {
+        padding: 15px;
+        width: 95%;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .save-button {
+        font-size: 0.9rem;
+    }
+
+    .nav a {
+        font-size: 0.8rem;
+        margin: 2px;
+    }
+
+    .add-event-button {
+        display: none;
+    }
+
+    .add-event-fab {
+        display: block;
+    }
+
+    .footer {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+}

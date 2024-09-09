@@ -1,0 +1,162 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #EDF4F2; 
+}
+
+.header {
+    background-color: #4c93af; 
+    color: #EDF4F2;
+    padding: 15px 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.nav a {
+    color: #EDF4F2; 
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+.nav a:hover {
+    text-decoration: underline;
+}
+
+.main-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.form-container, .category-list-container {
+    margin-bottom: 40px;
+}
+
+.form-container h2, .category-list-container h2 {
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #31473A; 
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.submit-button {
+    background-color: #007bff; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #0056b3; 
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+.category-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.category-table th, .category-table td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.category-table th {
+    background-color: #4c93af; 
+    color: #EDF4F2; 
+}
+
+.category-table td {
+    background-color: #fff;
+}
+
+.category-table td button {
+    color:white;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    margin-right: 10px;
+    padding: 6px;
+}
+
+.edit-button{
+    background-color: #056ddd;
+
+}
+.delete-button{
+    background-color: #f0270d;
+
+}
+.edit-button:hover{
+    background-color: #024083;
+
+}
+.delete-button:hover{
+    background-color: #c01600;
+
+}
+.footer {
+    background-color: #4c93af;
+    color: #EDF4F2; 
+    text-align: center;
+    padding: 15px 0;
+}
+
+@media (max-width: 768px) {
+    
+   
+    .main-container {
+        padding: 10px;
+    }
+
+    .category-table td button {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-group input, .form-group select {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .submit-button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+}
