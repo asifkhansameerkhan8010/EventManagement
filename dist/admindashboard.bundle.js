@@ -14,6 +14,7 @@ const addUserForm = document.getElementById('add-user-form');
 const submitButton = document.querySelector('.submit-button');
 const signupError = document.getElementById('signup-error');
 const backupButton = document.getElementById('backup-button');
+const restoreButton = document.getElementById('restore-button');
 const backupHistoryContainer = document.getElementById('backup-history');
 const addUserButton = document.getElementById('adduser');
 const formContainer = document.querySelector('.form-container');
@@ -82,6 +83,14 @@ function editUser(email) {
     }
 }
 function deleteUser(email) {
+    const userData = localStorage.getItem(email);
+    if (userData) {
+        const user = JSON.parse(userData);
+        if (user.role === 'admin') {
+            alert('Cannot delete admin user.');
+            return;
+        }
+    }
     localStorage.removeItem(email);
     deleteUserRelatedData(email);
     displayUsers();
@@ -184,7 +193,51 @@ function updateBackupHistory(fileName) {
     addBackupMetadata(fileName);
     displayBackupHistory();
 }
-// Ensure backup history is displayed on page load
+restoreButton.addEventListener('click', function () {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'application/json';
+    input.addEventListener('change', function (event) {
+        var _a;
+        const file = (_a = event.target.files) === null || _a === void 0 ? void 0 : _a[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                var _a;
+                const content = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
+                try {
+                    const data = JSON.parse(content);
+                    // Restore users
+                    for (const key in data.users) {
+                        localStorage.setItem(key, JSON.stringify(data.users[key]));
+                    }
+                    // Restore events
+                    for (const key in data.events) {
+                        localStorage.setItem(key, JSON.stringify(data.events[key]));
+                    }
+                    // Restore guests
+                    for (const key in data.guests) {
+                        localStorage.setItem(key, JSON.stringify(data.guests[key]));
+                    }
+                    // Restore agendas
+                    for (const key in data.agendas) {
+                        localStorage.setItem(key, JSON.stringify(data.agendas[key]));
+                    }
+                    // Restore categories
+                    localStorage.setItem('categories', JSON.stringify(data.categories));
+                    alert('Restore successful!');
+                    displayUsers();
+                }
+                catch (error) {
+                    console.error('Failed to parse backup file:', error);
+                    alert('Failed to restore data. Please ensure the file is valid.');
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
+    input.click();
+});
 displayBackupHistory();
 
 })();

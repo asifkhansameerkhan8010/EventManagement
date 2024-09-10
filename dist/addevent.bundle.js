@@ -18,7 +18,6 @@ if (!loggedInUser) {
 // events for logged-in user or initialize an empty array
 const userEventsKey = `events_${loggedInUser}`;
 let userEvents = JSON.parse(localStorage.getItem(userEventsKey) || '[]');
-//  EventData interface
 function populateEventCategories() {
     const categorySelect = document.getElementById('event-category');
     if (categorySelect) {
