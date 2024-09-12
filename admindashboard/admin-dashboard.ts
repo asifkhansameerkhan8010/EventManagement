@@ -10,6 +10,7 @@ const backupHistoryContainer = document.getElementById('backup-history') as HTML
 const addUserButton = document.getElementById('adduser') as HTMLButtonElement;
 const formContainer = document.querySelector('.form-container') as HTMLDivElement;
 const viewBackupHistoryButton = document.getElementById('view-backup-history-button') as HTMLButtonElement;
+
 let editingEmail: string | null = null;
 
 function displayUsers(): void {
@@ -163,7 +164,6 @@ function getLoggedInUserName(): string {
     return 'admin'; 
 }
 
-
 function backupData(): void {
     const userName = getLoggedInUserName(); 
 
@@ -200,7 +200,6 @@ function backupData(): void {
     updateBackupHistory(`backup_${new Date().toISOString()}.json`, userName);
 }
 
-
 backupButton.addEventListener('click', backupData);
 
 function displayBackupHistory(): void {
@@ -228,12 +227,10 @@ function addBackupMetadata(fileName: string, userName: string): void {
     localStorage.setItem('backupHistory', JSON.stringify(backupHistory));
 }
 
-
 function updateBackupHistory(fileName: string, userName: string): void {
     addBackupMetadata(fileName, userName);
     displayBackupHistory();
 }
-
 
 restoreButton.addEventListener('click', function() {
     const input = document.createElement('input');
@@ -245,39 +242,18 @@ restoreButton.addEventListener('click', function() {
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                const content = e.target?.result as string;
-                try {
-                    const data: BackupData = JSON.parse(content);
+                const result = e.target?.result as string;
+                const data: BackupData = JSON.parse(result);
 
-                    // users
-                    for (const key in data.users) {
-                        localStorage.setItem(key, JSON.stringify(data.users[key]));
-                    }
+                Object.keys(localStorage).forEach(key => localStorage.removeItem(key));
+                Object.keys(data.users).forEach(key => localStorage.setItem(key, JSON.stringify(data.users[key])));
+                Object.keys(data.events).forEach(key => localStorage.setItem(key, JSON.stringify(data.events[key])));
+                Object.keys(data.guests).forEach(key => localStorage.setItem(key, JSON.stringify(data.guests[key])));
+                Object.keys(data.agendas).forEach(key => localStorage.setItem(key, JSON.stringify(data.agendas[key])));
+                localStorage.setItem('categories', JSON.stringify(data.categories));
 
-                    // events
-                    for (const key in data.events) {
-                        localStorage.setItem(key, JSON.stringify(data.events[key]));
-                    }
-
-                    // guests
-                    for (const key in data.guests) {
-                        localStorage.setItem(key, JSON.stringify(data.guests[key]));
-                    }
-
-                    // agendas
-                    for (const key in data.agendas) {
-                        localStorage.setItem(key, JSON.stringify(data.agendas[key]));
-                    }
-
-                    //categories
-                    localStorage.setItem('categories', JSON.stringify(data.categories));
-
-                    alert('Restore successful!');
-                    displayUsers();
-                } catch (error) {
-                    console.error('Failed to parse backup file:', error);
-                    alert('Failed to restore data. Please ensure the file is valid.');
-                }
+                displayUsers();
+                displayBackupHistory();
             };
             reader.readAsText(file);
         }
@@ -286,6 +262,7 @@ restoreButton.addEventListener('click', function() {
     input.click();
 });
 
+// Toggle backup history visibility
 function toggleBackupHistoryVisibility(): void {
     const isVisible = backupHistoryContainer.style.display === 'block';
     backupHistoryContainer.style.display = isVisible ? 'none' : 'block';
@@ -301,6 +278,3 @@ document.addEventListener('click', function(event: MouseEvent) {
         backupHistoryContainer.style.display = 'none';
     }
 });
-
-
-displayBackupHistory();

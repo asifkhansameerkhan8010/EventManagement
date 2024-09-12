@@ -222,40 +222,23 @@ restoreButton.addEventListener('click', function () {
             const reader = new FileReader();
             reader.onload = function (e) {
                 var _a;
-                const content = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
-                try {
-                    const data = JSON.parse(content);
-                    // users
-                    for (const key in data.users) {
-                        localStorage.setItem(key, JSON.stringify(data.users[key]));
-                    }
-                    // events
-                    for (const key in data.events) {
-                        localStorage.setItem(key, JSON.stringify(data.events[key]));
-                    }
-                    // guests
-                    for (const key in data.guests) {
-                        localStorage.setItem(key, JSON.stringify(data.guests[key]));
-                    }
-                    // agendas
-                    for (const key in data.agendas) {
-                        localStorage.setItem(key, JSON.stringify(data.agendas[key]));
-                    }
-                    //categories
-                    localStorage.setItem('categories', JSON.stringify(data.categories));
-                    alert('Restore successful!');
-                    displayUsers();
-                }
-                catch (error) {
-                    console.error('Failed to parse backup file:', error);
-                    alert('Failed to restore data. Please ensure the file is valid.');
-                }
+                const result = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
+                const data = JSON.parse(result);
+                Object.keys(localStorage).forEach(key => localStorage.removeItem(key));
+                Object.keys(data.users).forEach(key => localStorage.setItem(key, JSON.stringify(data.users[key])));
+                Object.keys(data.events).forEach(key => localStorage.setItem(key, JSON.stringify(data.events[key])));
+                Object.keys(data.guests).forEach(key => localStorage.setItem(key, JSON.stringify(data.guests[key])));
+                Object.keys(data.agendas).forEach(key => localStorage.setItem(key, JSON.stringify(data.agendas[key])));
+                localStorage.setItem('categories', JSON.stringify(data.categories));
+                displayUsers();
+                displayBackupHistory();
             };
             reader.readAsText(file);
         }
     });
     input.click();
 });
+// Toggle backup history visibility
 function toggleBackupHistoryVisibility() {
     const isVisible = backupHistoryContainer.style.display === 'block';
     backupHistoryContainer.style.display = isVisible ? 'none' : 'block';
@@ -269,7 +252,6 @@ document.addEventListener('click', function (event) {
         backupHistoryContainer.style.display = 'none';
     }
 });
-displayBackupHistory();
 
 })();
 
