@@ -12,13 +12,14 @@
         <div class="header-container">
             <h1>Admin</h1>
             <nav class="nav">
-                <input type="file" id="restore-file-input" style="display: none;" accept=".json">
-                <button id="restore-button">Restore Backup</button>
-
-                <a href="../eventcategory/eventcategory.html">Event Category</a>
-                <a href="../login/login.html" id="logout-button">Logout</a>
-                <button id="backup-button">Backup Data</button>
-            </nav>
+                <a href="eventcategory.html">Category</a>
+                <a href="index.html" id="logout-button">Logout</a>
+                <div class="butttons">
+                    <button id="backup-button">Backup</button>
+                    <input type="file" id="restore-file-input" style="display: none;" accept=".json">
+                    <button id="restore-button">Restore</button>
+                </nav>
+            </div> 
         </div>
     </header>
     <button id="adduser">Add User</button>
@@ -74,7 +75,7 @@
 
         <!-- Backup-->
         <div class="backup-history-container">
-            <h2>Backup History</h2>
+            <h2>Backup History<button id="view-backup-history-button">View History</button></h2>
             <div id="backup-history">
                 
             </div>
@@ -85,6 +86,6 @@
         <p>&copy; 2024 Event Management App. All rights reserved.</p>
     </footer>
 
-    <script src="../dist/admindashboard.bundle.js"></script>
+    <script src="admindashboard.bundle.js"></script>
 </body>
 </html>

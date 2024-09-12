@@ -8,6 +8,10 @@ const passwordInput = document.getElementById('password') as HTMLInputElement;
 const confirmPasswordInput = document.getElementById('confirm-password') as HTMLInputElement;
 const signupError = document.getElementById('signup-error') as HTMLParagraphElement;
 
+const passwordValidationRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
+const usernameValidationRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
+
 signupForm.addEventListener('submit', function (event: Event) {
     event.preventDefault(); 
 
@@ -16,9 +20,19 @@ signupForm.addEventListener('submit', function (event: Event) {
     const password: string = passwordInput.value;
     const confirmPassword: string = confirmPasswordInput.value;
 
+    if (!usernameValidationRegex.test(username)) {
+        signupError.textContent = 'Username must start with a letter and can only contain letters and numbers.';
+        return;
+    }
+    
     // Check if passwords match
     if (password !== confirmPassword) {
         signupError.textContent = 'Passwords do not match!';
+        return;
+    }
+
+    if (!passwordValidationRegex.test(password)) {
+        signupError.textContent = 'Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one special character.';
         return;
     }
 
@@ -35,5 +49,5 @@ signupForm.addEventListener('submit', function (event: Event) {
     signupForm.reset();
 
     alert('Sign up successful! You can now log in.');
-    window.location.href = '../login/login.html'; 
+    window.location.href = 'index.html'; 
 });

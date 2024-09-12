@@ -18,6 +18,7 @@ const restoreButton = document.getElementById('restore-button');
 const backupHistoryContainer = document.getElementById('backup-history');
 const addUserButton = document.getElementById('adduser');
 const formContainer = document.querySelector('.form-container');
+const viewBackupHistoryButton = document.getElementById('view-backup-history-button');
 let editingEmail = null;
 function displayUsers() {
     if (!userListBody)
@@ -137,7 +138,19 @@ function getCategories() {
     const categoriesData = localStorage.getItem('categories');
     return categoriesData ? JSON.parse(categoriesData) : [];
 }
+function getLoggedInUserName() {
+    const loggedInUserEmail = localStorage.getItem('loggedInUser');
+    if (loggedInUserEmail) {
+        const userData = localStorage.getItem(loggedInUserEmail);
+        if (userData) {
+            const user = JSON.parse(userData);
+            return user.username || 'admin';
+        }
+    }
+    return 'admin';
+}
 function backupData() {
+    const userName = getLoggedInUserName();
     const data = {
         users: {},
         events: {},
@@ -169,7 +182,7 @@ function backupData() {
     a.download = `backup_${new Date().toISOString()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    updateBackupHistory(`backup_${new Date().toISOString()}.json`);
+    updateBackupHistory(`backup_${new Date().toISOString()}.json`, userName);
 }
 backupButton.addEventListener('click', backupData);
 function displayBackupHistory() {
@@ -180,17 +193,22 @@ function displayBackupHistory() {
         item.innerHTML = `
             <p><strong>Date:</strong> ${metadata.date}</p>
             <p><strong>File:</strong> ${metadata.fileName}</p>
+            <p><strong>Backed up by:</strong> ${metadata.userName}</p> 
         `;
         backupHistoryContainer.appendChild(item);
     });
 }
-function addBackupMetadata(fileName) {
+function addBackupMetadata(fileName, userName) {
     const backupHistory = JSON.parse(localStorage.getItem('backupHistory') || '[]');
-    backupHistory.push({ date: new Date().toLocaleString(), fileName });
+    backupHistory.push({
+        date: new Date().toLocaleString(),
+        fileName,
+        userName
+    });
     localStorage.setItem('backupHistory', JSON.stringify(backupHistory));
 }
-function updateBackupHistory(fileName) {
-    addBackupMetadata(fileName);
+function updateBackupHistory(fileName, userName) {
+    addBackupMetadata(fileName, userName);
     displayBackupHistory();
 }
 restoreButton.addEventListener('click', function () {
@@ -207,23 +225,23 @@ restoreButton.addEventListener('click', function () {
                 const content = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
                 try {
                     const data = JSON.parse(content);
-                    // Restore users
+                    // users
                     for (const key in data.users) {
                         localStorage.setItem(key, JSON.stringify(data.users[key]));
                     }
-                    // Restore events
+                    // events
                     for (const key in data.events) {
                         localStorage.setItem(key, JSON.stringify(data.events[key]));
                     }
-                    // Restore guests
+                    // guests
                     for (const key in data.guests) {
                         localStorage.setItem(key, JSON.stringify(data.guests[key]));
                     }
-                    // Restore agendas
+                    // agendas
                     for (const key in data.agendas) {
                         localStorage.setItem(key, JSON.stringify(data.agendas[key]));
                     }
-                    // Restore categories
+                    //categories
                     localStorage.setItem('categories', JSON.stringify(data.categories));
                     alert('Restore successful!');
                     displayUsers();
@@ -237,6 +255,19 @@ restoreButton.addEventListener('click', function () {
         }
     });
     input.click();
+});
+function toggleBackupHistoryVisibility() {
+    const isVisible = backupHistoryContainer.style.display === 'block';
+    backupHistoryContainer.style.display = isVisible ? 'none' : 'block';
+}
+// Add event listener for the "View Backup History" button
+viewBackupHistoryButton.addEventListener('click', toggleBackupHistoryVisibility);
+// Add event listener for clicks outside of the backup history container
+document.addEventListener('click', function (event) {
+    const target = event.target;
+    if (!backupHistoryContainer.contains(target) && !viewBackupHistoryButton.contains(target)) {
+        backupHistoryContainer.style.display = 'none';
+    }
 });
 displayBackupHistory();
 

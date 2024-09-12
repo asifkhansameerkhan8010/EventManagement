@@ -6,7 +6,6 @@ const adminCredentials: UserCredentials = {
     role: 'admin'
 };
 
-// admin credentials are set in local storage
 if (!localStorage.getItem(adminCredentials.email)) {
     localStorage.setItem(adminCredentials.email, JSON.stringify(adminCredentials));
 }
@@ -45,8 +44,8 @@ loginForm.addEventListener('submit', function (event: Event) {
     loginForm.reset();
 
     if (user.role == "admin") {
-        window.location.href = '../admindashboard/admin-dashboard.html';
+        window.location.href = 'admin-dashboard.html';
     } else {
-        window.location.href = '../dashboard/dashboard.html';
+        window.location.href = 'dashboard.html';
     }
 });

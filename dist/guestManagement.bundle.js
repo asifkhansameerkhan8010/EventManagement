@@ -13,7 +13,7 @@ const eventId = urlParams.get('eventId');
 console.log(eventId);
 if (!loggedInUser || !eventId) {
     alert('Invalid access. Please log in and select an event.');
-    window.location.href = '../login/login.html';
+    window.location.href = 'index.html';
 }
 const eventGuestsKey = `guests_${loggedInUser}_${eventId}`;
 let eventGuests = JSON.parse(localStorage.getItem(eventGuestsKey) || '[]');
@@ -54,7 +54,7 @@ function renderGuests() {
     const guestEmail = document.getElementById('guest-email').value;
     const guestRSVP = document.getElementById('guest-rsvp').value;
     // Check for email uniqueness
-    if (eventGuests.some(guest => guest.email === guestEmail && editingIndex === -1)) {
+    if (eventGuests.some((guest, index) => guest.email === guestEmail && index !== editingIndex)) {
         alert('This email is already in use. Please use a different email.');
         return;
     }
@@ -78,7 +78,6 @@ function renderGuests() {
     renderGuests();
     alert('Guest saved successfully!');
 });
-// Remove a guest from the list
 function removeGuest(index) {
     if (confirm('Are you sure you want to remove this guest?')) {
         eventGuests.splice(index, 1);
@@ -86,7 +85,6 @@ function removeGuest(index) {
         renderGuests();
     }
 }
-// Edit a guest's details
 function editGuest(index) {
     const guest = eventGuests[index];
     document.getElementById('guest-name').value = guest.name;

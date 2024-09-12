@@ -13,7 +13,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const loggedInUser = localStorage.getItem('loggedInUser');
 if (!loggedInUser) {
     alert('You must be logged in to add or edit events.');
-    window.location.href = '../login/login.html';
+    window.location.href = 'index.html';
 }
 // events for logged-in user or initialize an empty array
 const userEventsKey = `events_${loggedInUser}`;
@@ -103,7 +103,7 @@ if (eventId) {
     localStorage.setItem(userEventsKey, JSON.stringify(userEvents));
     this.reset();
     alert('Event saved successfully!');
-    window.location.href = '../dashboard/dashboard.html';
+    window.location.href = 'dashboard.html';
 });
 
 })();

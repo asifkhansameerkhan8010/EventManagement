@@ -9,6 +9,7 @@ const restoreButton = document.getElementById('restore-button') as HTMLButtonEle
 const backupHistoryContainer = document.getElementById('backup-history') as HTMLDivElement;
 const addUserButton = document.getElementById('adduser') as HTMLButtonElement;
 const formContainer = document.querySelector('.form-container') as HTMLDivElement;
+const viewBackupHistoryButton = document.getElementById('view-backup-history-button') as HTMLButtonElement;
 let editingEmail: string | null = null;
 
 function displayUsers(): void {
@@ -150,7 +151,22 @@ function getCategories(): Category[] {
     return categoriesData ? JSON.parse(categoriesData) as Category[] : [];
 }
 
+function getLoggedInUserName(): string {
+    const loggedInUserEmail = localStorage.getItem('loggedInUser');
+    if (loggedInUserEmail) {
+        const userData = localStorage.getItem(loggedInUserEmail);
+        if (userData) {
+            const user: User = JSON.parse(userData);
+            return user.username || 'admin'; 
+        }
+    }
+    return 'admin'; 
+}
+
+
 function backupData(): void {
+    const userName = getLoggedInUserName(); 
+
     const data: BackupData = {
         users: {},
         events: {},
@@ -181,8 +197,9 @@ function backupData(): void {
     a.download = `backup_${new Date().toISOString()}.json`;
     a.click();
     URL.revokeObjectURL(url);
-    updateBackupHistory(`backup_${new Date().toISOString()}.json`);
+    updateBackupHistory(`backup_${new Date().toISOString()}.json`, userName);
 }
+
 
 backupButton.addEventListener('click', backupData);
 
@@ -195,21 +212,28 @@ function displayBackupHistory(): void {
         item.innerHTML = `
             <p><strong>Date:</strong> ${metadata.date}</p>
             <p><strong>File:</strong> ${metadata.fileName}</p>
+            <p><strong>Backed up by:</strong> ${metadata.userName}</p> 
         `;
         backupHistoryContainer.appendChild(item);
     });
 }
 
-function addBackupMetadata(fileName: string): void {
+function addBackupMetadata(fileName: string, userName: string): void {
     const backupHistory = JSON.parse(localStorage.getItem('backupHistory') || '[]') as BackupMetadata[];
-    backupHistory.push({ date: new Date().toLocaleString(), fileName });
+    backupHistory.push({ 
+        date: new Date().toLocaleString(), 
+        fileName,
+        userName 
+    });
     localStorage.setItem('backupHistory', JSON.stringify(backupHistory));
 }
 
-function updateBackupHistory(fileName: string): void {
-    addBackupMetadata(fileName);
+
+function updateBackupHistory(fileName: string, userName: string): void {
+    addBackupMetadata(fileName, userName);
     displayBackupHistory();
 }
+
 
 restoreButton.addEventListener('click', function() {
     const input = document.createElement('input');
@@ -261,5 +285,22 @@ restoreButton.addEventListener('click', function() {
 
     input.click();
 });
+
+function toggleBackupHistoryVisibility(): void {
+    const isVisible = backupHistoryContainer.style.display === 'block';
+    backupHistoryContainer.style.display = isVisible ? 'none' : 'block';
+}
+
+// Add event listener for the "View Backup History" button
+viewBackupHistoryButton.addEventListener('click', toggleBackupHistoryVisibility);
+
+// Add event listener for clicks outside of the backup history container
+document.addEventListener('click', function(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!backupHistoryContainer.contains(target) && !viewBackupHistoryButton.contains(target)) {
+        backupHistoryContainer.style.display = 'none';
+    }
+});
+
 
 displayBackupHistory();

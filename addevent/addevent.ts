@@ -3,7 +3,7 @@ import {Event} from "../models/Model"
 const loggedInUser: string | null = localStorage.getItem('loggedInUser');
 if (!loggedInUser) {
     alert('You must be logged in to add or edit events.');
-    window.location.href = '../login/login.html';
+    window.location.href = 'index.html';
 }
 
 // events for logged-in user or initialize an empty array
@@ -100,5 +100,5 @@ document.querySelector('form')?.addEventListener('submit', function (event) {
     (this as HTMLFormElement).reset();
 
     alert('Event saved successfully!');
-    window.location.href = '../dashboard/dashboard.html';
+    window.location.href = 'dashboard.html';
 });

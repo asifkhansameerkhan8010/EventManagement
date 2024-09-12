@@ -3,7 +3,7 @@ import { AgendaItem, Event } from "../models/Model";
 const loggedInUser: string | null = localStorage.getItem('loggedInUser');
 if (!loggedInUser) {
     alert('Please log in first.');
-    window.location.href = '../login/login.html'; 
+    window.location.href = 'index.html'; 
 }
 
 document.getElementById('username-display')!.innerText = `${loggedInUser}`;
@@ -148,7 +148,7 @@ renderEvents(userEvents);
 document.getElementById('logout-button')!.addEventListener('click', function () {
     localStorage.removeItem('loggedInUser');
     alert('You have been logged out.');
-    window.location.href = '../login/login.html'; 
+    window.location.href = 'index.html'; 
 });
 
 // View Event Details
@@ -158,12 +158,12 @@ function viewEventDetails(eventId: number): void {
 
 // Manage Guests
 function manageGuests(eventId: number): void {
-    window.location.href = `../guest-management/guest-management.html?eventId=${eventId}`;
+    window.location.href = `guest-management.html?eventId=${eventId}`;
 }
 
 // Edit Event
 function editEvent(eventId: number): void {
-    window.location.href = `../addevent/addevent.html?eventId=${eventId}`;
+    window.location.href = `addevent.html?eventId=${eventId}`;
 }
 
 // Function to display the agenda modal

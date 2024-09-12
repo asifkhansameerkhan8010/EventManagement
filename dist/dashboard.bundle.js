@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const loggedInUser = localStorage.getItem('loggedInUser');
 if (!loggedInUser) {
     alert('Please log in first.');
-    window.location.href = '../login/login.html';
+    window.location.href = 'index.html';
 }
 document.getElementById('username-display').innerText = `${loggedInUser}`;
 // User events from local storage
@@ -133,7 +133,7 @@ document.getElementById('filter-status').addEventListener('change', filterEvents
 document.getElementById('logout-button').addEventListener('click', function () {
     localStorage.removeItem('loggedInUser');
     alert('You have been logged out.');
-    window.location.href = '../login/login.html';
+    window.location.href = 'index.html';
 });
 // View Event Details
 function viewEventDetails(eventId) {
@@ -141,11 +141,11 @@ function viewEventDetails(eventId) {
 }
 // Manage Guests
 function manageGuests(eventId) {
-    window.location.href = `../guest-management/guest-management.html?eventId=${eventId}`;
+    window.location.href = `guest-management.html?eventId=${eventId}`;
 }
 // Edit Event
 function editEvent(eventId) {
-    window.location.href = `../addevent/addevent.html?eventId=${eventId}`;
+    window.location.href = `addevent.html?eventId=${eventId}`;
 }
 // Function to display the agenda modal
 function showAgendaModal(eventId) {

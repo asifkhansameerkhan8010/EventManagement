@@ -15,15 +15,25 @@ const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
 const confirmPasswordInput = document.getElementById('confirm-password');
 const signupError = document.getElementById('signup-error');
+const passwordValidationRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+const usernameValidationRegex = /^[a-zA-Z][a-zA-Z0-9]*$/;
 signupForm.addEventListener('submit', function (event) {
     event.preventDefault();
     const username = usernameInput.value;
     const email = emailInput.value;
     const password = passwordInput.value;
     const confirmPassword = confirmPasswordInput.value;
+    if (!usernameValidationRegex.test(username)) {
+        signupError.textContent = 'Username must start with a letter and can only contain letters and numbers.';
+        return;
+    }
     // Check if passwords match
     if (password !== confirmPassword) {
         signupError.textContent = 'Passwords do not match!';
+        return;
+    }
+    if (!passwordValidationRegex.test(password)) {
+        signupError.textContent = 'Password must be at least 8 characters long, include at least one uppercase letter, one lowercase letter, and one special character.';
         return;
     }
     if (localStorage.getItem(email)) {
@@ -36,7 +46,7 @@ signupForm.addEventListener('submit', function (event) {
     signupError.textContent = '';
     signupForm.reset();
     alert('Sign up successful! You can now log in.');
-    window.location.href = '../login/login.html';
+    window.location.href = 'index.html';
 });
 
 })();
